@@ -1,0 +1,86 @@
+﻿@model IEnumerable<CoverType>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+
+            @* Title *@
+            <h2 class="text-primary">
+                CoverType List
+            </h2>
+        </div>
+
+        @* Create button *@
+        <div class="col-6 text-end">
+            <a asp-controller="CoverType"
+               asp-action="Create"
+               class="btn btn-primary">
+                @* Plus circle icon *@
+                <i class="bi bi-plus-circle"></i>
+                &nbsp; Create new CoverType
+            </a>
+        </div>
+    </div>
+    <br><br />
+
+    @* Table *@
+<table class="table table-bordered table-striped" style="width:100%">
+
+    @* Table Header *@
+    <thead>
+        <tr>
+            <th>
+                Category Name
+            </th>
+            <th></th>
+
+        </tr>
+    </thead>
+
+    @* Table Body *@
+    <tbody>
+
+        @* Foreach Loop to print category list from db *@
+        @foreach (var obj in Model)
+        {
+            <tr>
+                @* Name column *@
+                <td width="80%">
+                    @obj.Name
+                </td>
+
+                @* Edit button *@
+                <td>
+                    <div class="d-flex align-items-center justify-content-center" role="group">
+                        <a asp-controller="CoverType"
+                           asp-action="Edit"
+                           asp-route-id="@obj.Id"
+                           class="btn btn-primary">
+
+                            @* Pencil square icon *@
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                    </div>
+                </td>
+
+                @* Delete button *@
+                <td>
+                    <div class="d-flex align-items-center justify-content-center" role="group">
+                        <a asp-controller="CoverType"
+                           asp-action="Delete"
+                           asp-route-id="@obj.Id"
+                           class="btn btn-danger">
+
+                            @* Trash can icon *@
+                            <i class="bi bi-trash3-fill"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

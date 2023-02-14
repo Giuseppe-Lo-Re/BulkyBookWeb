@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace BulkyBookWeb.Controllers;
 [Area("Admin")]
 
-    public class CategoryController : Controller
+    public class CoverTypeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 
         // Constructor
-        public CategoryController(IUnitOfWork unitOfWork)
+        public CoverTypeController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -20,9 +20,9 @@ namespace BulkyBookWeb.Controllers;
 
         public IActionResult Index()
         {
-            IEnumerable<Category> objCategoryList = _unitOfWork.Category.GetAll();
+            IEnumerable<CoverType> objCoverTypeList = _unitOfWork.CoverType.GetAll();
 
-            return View(objCategoryList);
+            return View(objCoverTypeList);
         }
 
         // -------------------- CREATE -------------------- //
@@ -38,26 +38,20 @@ namespace BulkyBookWeb.Controllers;
         [HttpPost] // Method attribute
         [ValidateAntiForgeryToken] // CSRF (Cross-Site Request Forgery) 
 
-        public IActionResult Create(Category obj)
+        public IActionResult Create(CoverType obj)
         {
-            // Validation
-            if (obj.Name == obj.DisplayOrder.ToString())
-            {
-                // Error message
-                ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name.");
-            }
-
+            
             // Validation
             if (ModelState.IsValid) 
             {
                 // Add object to Categories
-                _unitOfWork.Category.Add(obj);
+                _unitOfWork.CoverType.Add(obj);
 
                 // Save on db
                 _unitOfWork.Save();
 
                 // Success message
-                TempData["success"] = "Category created successfully";
+                TempData["success"] = "CoverType created successfully";
 
                 // Redirect to Index
                 return RedirectToAction("Index");
@@ -75,18 +69,15 @@ namespace BulkyBookWeb.Controllers;
             {
                 return NotFound();
             }
+ 
+            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefaul(u=>u.Id == id); 
 
-            //var categoryFromDb = _db.Categories.Find(id); // find category with specified id 
-
-            var categoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefaul(u=>u.Id == id); // return first instance -> if no exists return NULL
-            //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u => u.Id == id); // return only one element -> If exists more than one or no exists return NULL 
-
-            if (categoryFromDbFirst == null)
+            if (CoverTypeFromDbFirst == null)
             {
                 return NotFound();
             }
 
-            return View(categoryFromDbFirst);
+            return View(CoverTypeFromDbFirst);
         }
 
         // POST
@@ -94,26 +85,19 @@ namespace BulkyBookWeb.Controllers;
         [HttpPost] // Method attribute
         [ValidateAntiForgeryToken] // CSRF (Cross-Site Request Forgery) 
 
-        public IActionResult Edit(Category obj)
+        public IActionResult Edit(CoverType obj)
         {
-            // Validation
-            if (obj.Name == obj.DisplayOrder.ToString())
-            {
-                // Error message
-                ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name.");
-            }
-
             // Validation
             if (ModelState.IsValid) 
             {
-                // Update object to Categories
-                _unitOfWork.Category.Update(obj);
+                // Update object to CoverType
+                _unitOfWork.CoverType.Update(obj);
 
                 // Save on db
                 _unitOfWork.Save();
 
                 // Success message
-                TempData["success"] = "Category updated successfully";
+                TempData["success"] = "CoverType updated successfully";
 
                 // Redirect to Index
                 return RedirectToAction("Index");
@@ -133,27 +117,24 @@ namespace BulkyBookWeb.Controllers;
                 return NotFound();
             }
 
-            //var categoryFromDb = _db.Categories.Find(id); // find category with specified id 
+            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefaul(u=>u.Id == id); // return first instance -> if no exists return NULL
 
-            var categoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefaul(u=>u.Id == id); // return first instance -> if no exists return NULL
-            //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u => u.Id == id); // return only one element -> If exists more than one or no exists return NULL 
-
-            if (categoryFromDbFirst == null)
+            if (CoverTypeFromDbFirst == null)
             {
                 return NotFound();
             }
 
-            return View(categoryFromDbFirst);
+            return View(CoverTypeFromDbFirst);
         }
 
         // POST
 
-        [HttpPost, ActionName("Delete")] // Method attribute + define action name("Category/Delete/id")
-        [ValidateAntiForgeryToken] // CSRF (Cross-Site Request Forgery) 
+        [HttpPost, ActionName("Delete")] // Method attribute + define action name("CoverType/Delete/id")
+    [ValidateAntiForgeryToken] // CSRF (Cross-Site Request Forgery) 
 
         public IActionResult DeletePOST(int? id)
         {
-            var obj = _unitOfWork.Category.GetFirstOrDefaul(u => u.Id == id);
+            var obj = _unitOfWork.CoverType.GetFirstOrDefaul(u => u.Id == id);
 
             if (obj == null)
             {
@@ -161,13 +142,13 @@ namespace BulkyBookWeb.Controllers;
             }
 
             // Remove object to Categories
-            _unitOfWork.Category.Remove(obj);
+            _unitOfWork.CoverType.Remove(obj);
 
             // Save on db
             _unitOfWork.Save();
 
             // Success message
-            TempData["success"] = "Category deleted successfully";
+            TempData["success"] = "CoverType deleted successfully";
 
             // Redirect to Index
             return RedirectToAction("Index");

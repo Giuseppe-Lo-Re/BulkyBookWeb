@@ -1,0 +1,55 @@
+﻿@model Category
+
+<form method="post" asp-action="Delete">
+
+    <input asp-for="Id" hidden />
+
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+
+            @*Title*@
+            <h2 class="text-primary">
+                Delete Category
+            </h2>
+            <hr />
+        </div>
+
+        @*Validation summary*@
+        @*<div asp-validation-summary="All"></div>*@
+
+        @*Name*@
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" disabled class="form-control" />
+
+            @*Validation*@
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        @*Display Order*@
+        <div class="mb-3">
+            <label asp-for="DisplayOrder"></label>
+            <input asp-for="DisplayOrder" disabled mclass="form-control" />
+
+            @*Validation*@
+            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+        </div>
+
+        @*Delete button*@
+        <button type="submit" class="btn btn-danger" style="width:150px">
+            Delete
+        </button>
+
+        @*Back to List button*@
+        <a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to List
+        </a>
+    </div>
+</form>
+
+@*Validation (no reload on error validation)*@
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

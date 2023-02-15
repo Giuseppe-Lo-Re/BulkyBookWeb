@@ -86,15 +86,26 @@
             <span asp-validation-for="Price100" class="text-danger"></span>
         </div>
 
-        @* Price100 *@
+        @* Category Select *@
         <div class="mb-3">
             <label asp-for="CategoryId"></label>
             <select asp-for="CategoryId" asp-items="ViewBag.CategoryList" class="form-select">
-               <option disabled selected>-- Select Category -- </option>
+                <option disabled selected>-- Select Category -- </option>
             </select>
 
             @* Validation *@
             <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        @* Covertype Select *@
+        <div class="mb-3">
+            <label asp-for="CoverTypeId"></label>
+            <select asp-for="CoverTypeId" asp-items="@(ViewData["CoverTypeList"]) as IEnumerable<SelectListItem>" class="form-select">
+                <option disabled selected>-- Select CoverType -- </option>
+            </select>
+
+            @* Validation *@
+            <span asp-validation-for="CoverTypeId" class="text-danger"></span>
         </div>
 
         @* Update button *@

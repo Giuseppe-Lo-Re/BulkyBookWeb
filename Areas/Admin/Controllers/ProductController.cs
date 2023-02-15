@@ -50,7 +50,13 @@ namespace BulkyBookWeb.Controllers;
         if (id == null || id == 0)
             {
                 // Create product
+
+                // Pass data to the Upsert View w/ Viewbag
                 ViewBag.CategoryList = CategoryList;
+
+                // Pass data to the Upsert View w/ Viewdata
+                ViewData["CoverTypeList"] = CoverTypeList;
+
                 return View(product);
             }
             else

@@ -6,7 +6,7 @@
 
             @* Page Title *@
             <h2 class="text-primary">
-                Edit Product
+                @(Model.Product.Id != 0 ? "Update" : "Create") Product
             </h2>
             <hr />
         </div>
@@ -89,7 +89,7 @@
         @* Image URL *@
         <div class="mb-3">
             <label asp-for="Product.ImageUrl"></label>
-            <input type="file" class="form-control" />
+            <input type="file" id="uploadBox" class="form-control" />
         </div>
 
         @* Category Select *@
@@ -115,11 +115,22 @@
         </div>
 
         <div class="col-12">
+            @if (Model.Product.Id != 0)
+            {
 
-            @* Update button *@
-            <button type="submit" class="btn btn-primary" style="width:150px">
-                Update
-            </button>
+                @* Update button *@
+                <button type="submit" class="btn btn-primary" style="width:150px">
+                    Update
+                </button>
+            }
+            else
+            {
+                @* Create button *@
+                <button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">
+                    Create
+                </button>
+            }
+
 
             @* Back to List button *@
             <a asp-controller="CoverType" asp-action="Index" class="btn btn-secondary" style="width:150px">
@@ -134,4 +145,17 @@
     @{
         <partial name="_ValidationScriptsPartial" />
     }
+    <script>
+        function ValidateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                Swal.fire({
+                    icon: 'error,
+                    title: 'Oops',
+                    text: 'Please upload an Image'
+                });
+                return false;
+            }
+            return true;
+        }
+    </script>
 }

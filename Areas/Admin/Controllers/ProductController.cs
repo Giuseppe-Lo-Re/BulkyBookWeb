@@ -3,6 +3,7 @@ using BulkyBook.DataAccess.Repository.IRepository;
 using BulkyBook.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using BulkyBook.Models.ViewModels;
 
 namespace BulkyBookWeb.Controllers;
 [Area("Admin")]
@@ -32,32 +33,34 @@ namespace BulkyBookWeb.Controllers;
 
         public IActionResult Upsert(int? id)
         {
-            Product product = new();
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(
-                u=> new SelectListItem
-                {
-                    Text = u.Name,
-                    Value = u.Id.ToString()
-                });
+        ProductVM productVM = new()
+        {
+            Product = new(),
 
-            IEnumerable<SelectListItem> CoverTypeList = _unitOfWork.CoverType.GetAll().Select(
-            u => new SelectListItem
+            CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
             {
-                Text = u.Name,
-                Value = u.Id.ToString()
-            });
+                Text = i.Name,
+                Value = i.Id.ToString()
+            }),
 
-        if (id == null || id == 0)
+            CoverTypeList = _unitOfWork.CoverType.GetAll().Select(i => new SelectListItem
             {
-                // Create product
+                Text = i.Name,
+                Value = i.Id.ToString()
+            }),
+        };
+            
+            if (id == null || id == 0)
+            {
+            // Create product
 
-                // Pass data to the Upsert View w/ Viewbag
-                ViewBag.CategoryList = CategoryList;
+            // Pass data to the Upsert View w/ Viewbag
+            //ViewBag.CategoryList = CategoryList;
 
-                // Pass data to the Upsert View w/ Viewdata
-                ViewData["CoverTypeList"] = CoverTypeList;
+            // Pass data to the Upsert View w/ Viewdata
+            //ViewData["CoverTypeList"] = CoverTypeList;
 
-                return View(product);
+            return View(productVM);
             }
             else
             {
@@ -66,7 +69,7 @@ namespace BulkyBookWeb.Controllers;
 
             var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefaul(u=>u.Id == id); 
 
-            return View(product);
+            return View(productVM);
         }
 
         // POST

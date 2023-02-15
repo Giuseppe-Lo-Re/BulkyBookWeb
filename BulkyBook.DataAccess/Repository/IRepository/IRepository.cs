@@ -12,10 +12,10 @@ namespace BulkyBook.DataAccess.Repository.IRepository
 		// T - Category
 
 		// Return first element with these condictions
-		T GetFirstOrDefaul(Expression<Func<T,bool>> filter);
+		T GetFirstOrDefaul(Expression<Func<T,bool>> filter, string? includeProperties = null);
 
 		// Return all elements
-		IEnumerable<T> GetAll();
+		IEnumerable<T> GetAll(string? includeProperties = null);
 
 		// Add new element
 		void Add(T entity);

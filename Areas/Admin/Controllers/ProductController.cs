@@ -33,22 +33,23 @@ namespace BulkyBookWeb.Controllers;
 
         public IActionResult Upsert(int? id)
         {
-        ProductVM productVM = new()
-        {
-            Product = new(),
 
-            CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
+            ProductVM productVM = new()
             {
-                Text = i.Name,
-                Value = i.Id.ToString()
-            }),
+                Product = new(),
 
-            CoverTypeList = _unitOfWork.CoverType.GetAll().Select(i => new SelectListItem
-            {
-                Text = i.Name,
-                Value = i.Id.ToString()
-            }),
-        };
+                CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
+
+                CoverTypeList = _unitOfWork.CoverType.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
+            };
             
             if (id == null || id == 0)
             {
@@ -64,12 +65,15 @@ namespace BulkyBookWeb.Controllers;
             }
             else
             {
-                // Update product
+                
+                productVM.Product = _unitOfWork.Product.GetFirstOrDefaul(u => u.Id == id);
+                return View(productVM);
+            // Update product
             }
 
-            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefaul(u=>u.Id == id); 
+            //var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefaul(u=>u.Id == id); 
 
-            return View(productVM);
+           
         }
 
         // POST

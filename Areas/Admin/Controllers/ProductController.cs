@@ -25,59 +25,27 @@ namespace BulkyBookWeb.Controllers;
             return View(objCoverTypeList);
         }
 
-        // -------------------- CREATE -------------------- //
-
-        // GET
-        public IActionResult Create()
-        {
-            
-            return View();
-        }
-
-        // POST
-        [HttpPost] // Method attribute
-        [ValidateAntiForgeryToken] // CSRF (Cross-Site Request Forgery) 
-
-        public IActionResult Create(CoverType obj)
-        {
-            
-            // Validation
-            if (ModelState.IsValid) 
-            {
-                // Add object to Categories
-                _unitOfWork.CoverType.Add(obj);
-
-                // Save on db
-                _unitOfWork.Save();
-
-                // Success message
-                TempData["success"] = "CoverType created successfully";
-
-                // Redirect to Index
-                return RedirectToAction("Index");
-            }
-            return View(obj);
-        }
-
         // -------------------- EDIT -------------------- //
 
         // GET
 
-        public IActionResult Edit(int? id)
+        public IActionResult Upsert(int? id)
         {
+        Product product = new();
+
             if(id == null || id == 0)
             {
-                return NotFound();
+                // Create product
+                return View(product);
             }
- 
+            else
+            {
+                // Update product
+            }
+
             var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefaul(u=>u.Id == id); 
 
-            if (CoverTypeFromDbFirst == null)
-            {
-                return NotFound();
-            }
-
-            return View(CoverTypeFromDbFirst);
+            return View(product);
         }
 
         // POST
@@ -85,7 +53,7 @@ namespace BulkyBookWeb.Controllers;
         [HttpPost] // Method attribute
         [ValidateAntiForgeryToken] // CSRF (Cross-Site Request Forgery) 
 
-        public IActionResult Edit(CoverType obj)
+        public IActionResult Upsert(CoverType obj)
         {
             // Validation
             if (ModelState.IsValid) 

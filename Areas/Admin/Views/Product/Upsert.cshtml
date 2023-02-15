@@ -86,6 +86,17 @@
             <span asp-validation-for="Price100" class="text-danger"></span>
         </div>
 
+        @* Price100 *@
+        <div class="mb-3">
+            <label asp-for="CategoryId"></label>
+            <select asp-for="CategoryId" asp-items="ViewBag.CategoryList" class="form-select">
+               <option disabled selected>-- Select Category -- </option>
+            </select>
+
+            @* Validation *@
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
         @* Update button *@
         <button type="submit" class="btn btn-primary" style="width:150px">
             Update

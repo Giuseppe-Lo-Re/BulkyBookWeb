@@ -52,15 +52,15 @@ namespace BulkyBookWeb.Controllers;
             
             if (id == null || id == 0)
             {
-            // Create product
+                // Create product
 
-            // Pass data to the Upsert View w/ Viewbag
-            //ViewBag.CategoryList = CategoryList;
+                // Pass data to the Upsert View w/ Viewbag
+                //ViewBag.CategoryList = CategoryList;
 
-            // Pass data to the Upsert View w/ Viewdata
-            //ViewData["CoverTypeList"] = CoverTypeList;
+                // Pass data to the Upsert View w/ Viewdata
+                //ViewData["CoverTypeList"] = CoverTypeList;
 
-            return View(productVM);
+                return View(productVM);
             }
             else
             {
@@ -77,13 +77,13 @@ namespace BulkyBookWeb.Controllers;
         [HttpPost] // Method attribute
         [ValidateAntiForgeryToken] // CSRF (Cross-Site Request Forgery) 
 
-        public IActionResult Upsert(CoverType obj)
+        public IActionResult Upsert(ProductVM obj, IFormFile file)
         {
             // Validation
             if (ModelState.IsValid) 
             {
                 // Update object to CoverType
-                _unitOfWork.CoverType.Update(obj);
+                //_unitOfWork.CoverType.Update(obj);
 
                 // Save on db
                 _unitOfWork.Save();

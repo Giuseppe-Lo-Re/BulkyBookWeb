@@ -33,16 +33,9 @@
     @* Table Header *@
     <thead>
         <tr>
-            <th>
-                Category Name
-            </th>
-            <th>
-                Display Order
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>
+            <th>Category Name</th>
+            <th>Display Order</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -63,9 +56,11 @@
                     @obj.DisplayOrder
                 </td>
 
-                @* Edit button *@
+                
                 <td>
-                    <div class="w-20 btn-group" role="group">
+                    <div class="w-20 btn-group">
+
+                        @* Edit button *@
                         <a asp-controller="Category"
                            asp-action="Edit"
                            asp-route-id="@obj.Id"
@@ -74,12 +69,8 @@
                             @* Pencil square icon *@
                             <i class="bi bi-pencil-square"></i>
                         </a>
-                    </div>
-                </td>
 
-                @* Delete button *@
-                <td>
-                    <div class="w-20 btn-group" role="group">
+                        @* Delete button *@
                         <a asp-controller="Category"
                            asp-action="Delete"
                            asp-route-id="@obj.Id"

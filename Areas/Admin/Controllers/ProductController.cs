@@ -11,7 +11,7 @@ namespace BulkyBookWeb.Controllers;
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-    private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
         // Constructor
         public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
@@ -34,16 +34,20 @@ namespace BulkyBookWeb.Controllers;
         public IActionResult Upsert(int? id)
         {
 
+            // new instance of ProductVm (view model product)
             ProductVM productVM = new()
             {
+                // new 
                 Product = new(),
 
+                // Retrieve all categories
                 CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
                 {
                     Text = i.Name,
                     Value = i.Id.ToString()
                 }),
 
+                // Retrieve all covertypes
                 CoverTypeList = _unitOfWork.CoverType.GetAll().Select(i => new SelectListItem
                 {
                     Text = i.Name,
@@ -65,15 +69,11 @@ namespace BulkyBookWeb.Controllers;
             }
             else
             {
-                
+                // Retrieve the first or default product where category Id = id variable
                 productVM.Product = _unitOfWork.Product.GetFirstOrDefaul(u => u.Id == id);
+
                 return View(productVM);
-            // Update product
             }
-
-            //var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefaul(u=>u.Id == id); 
-
-           
         }
 
         // POST
@@ -86,19 +86,29 @@ namespace BulkyBookWeb.Controllers;
             // Validation
             if (ModelState.IsValid) 
             {
+                // Initialize wwwRootPath with the path of the web root folder in the web server's file system
                 string wwwRootPath = _hostEnvironment.WebRootPath;
 
+                // Upload image file
                 if(file != null)
                 {
+                    // Generate a new unique identifier
                     string fileName = Guid.NewGuid().ToString();
+
+                    // Set the path where the uploaded product image will be saved
                     var uploads = Path.Combine(wwwRootPath, @"images/products");
+
+                    // Rename the uploaded image to a unique name
                     var extension = Path.GetExtension(file.FileName);
 
+                    // Create combined file path
                     using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                     {
+                        //Copy file into file streams
                         file.CopyTo(fileStreams);
                     }
 
+                    // Assign image file URL
                     obj.Product.ImageUrl = @"\images/products" + fileName + extension;
                 }
 
@@ -111,7 +121,6 @@ namespace BulkyBookWeb.Controllers;
                 // Success message
                 TempData["success"] = "Product created successfully";
 
-                // Redirect to Index
                 return RedirectToAction("Index");
             }
 
@@ -129,7 +138,8 @@ namespace BulkyBookWeb.Controllers;
                 return NotFound();
             }
 
-            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefaul(u=>u.Id == id); // return first instance -> if no exists return NULL
+            // Retrieve the first or default cavoertype where category Id = id variable
+            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefaul(u=>u.Id == id);
 
             if (CoverTypeFromDbFirst == null)
             {
@@ -142,10 +152,11 @@ namespace BulkyBookWeb.Controllers;
         // POST
 
         [HttpPost, ActionName("Delete")] // Method attribute + define action name("CoverType/Delete/id")
-    [ValidateAntiForgeryToken] // CSRF (Cross-Site Request Forgery) 
+        [ValidateAntiForgeryToken] // CSRF (Cross-Site Request Forgery) 
 
         public IActionResult DeletePOST(int? id)
         {
+            // Retrieve the first or default category where category Id = id variable
             var obj = _unitOfWork.CoverType.GetFirstOrDefaul(u => u.Id == id);
 
             if (obj == null)
@@ -162,7 +173,6 @@ namespace BulkyBookWeb.Controllers;
             // Success message
             TempData["success"] = "CoverType deleted successfully";
 
-            // Redirect to Index
             return RedirectToAction("Index");
         }
 
@@ -171,7 +181,10 @@ namespace BulkyBookWeb.Controllers;
     [HttpGet]
     public IActionResult GetAll()
     {
+        // Retrieve a list of all products and includes category and covertype
         var productList = _unitOfWork.Product.GetAll(includeProperties:"Category,CoverType");
+
+        // Return a Json containting the list
         return Json(new { data = productList });
     }
 

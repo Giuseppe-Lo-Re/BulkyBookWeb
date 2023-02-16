@@ -5,6 +5,7 @@ namespace BulkyBook.DataAccess;
 
 public class ApplicationDbContext : DbContext
 {
+    // Constructor
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }

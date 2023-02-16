@@ -11,7 +11,7 @@ namespace BulkyBook.DataAccess.Repository.IRepository
 	{
 		// T - Category
 
-		// Return first element with these condictions
+		// Return first element or default with these conditions
 		T GetFirstOrDefaul(Expression<Func<T,bool>> filter, string? includeProperties = null);
 
 		// Return all elements

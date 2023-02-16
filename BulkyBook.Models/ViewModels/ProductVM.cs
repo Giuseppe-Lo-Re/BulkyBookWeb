@@ -6,12 +6,14 @@ namespace BulkyBook.Models.ViewModels
 {
 	public class ProductVM
 	{
+        // Properties
+
         public Product Product { get; set; }
 
-        [ValidateNever]
+        [ValidateNever] // No validation
         public IEnumerable<SelectListItem> CategoryList { get; set; }
 
-        [ValidateNever]
+        [ValidateNever] // No validation
         public IEnumerable<SelectListItem> CoverTypeList { get; set; }
     }
 }

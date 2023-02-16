@@ -7,6 +7,8 @@ namespace BulkyBook.Models
 {
 	public class Product
 	{
+        // Properties
+
 		public int Id { get; set; }
 
         [Required]

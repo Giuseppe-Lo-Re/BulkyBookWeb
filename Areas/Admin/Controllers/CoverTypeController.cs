@@ -20,6 +20,7 @@ namespace BulkyBookWeb.Controllers;
 
         public IActionResult Index()
         {
+            // Retrieve all covertypes
             IEnumerable<CoverType> objCoverTypeList = _unitOfWork.CoverType.GetAll();
 
             return View(objCoverTypeList);
@@ -28,13 +29,14 @@ namespace BulkyBookWeb.Controllers;
         // -------------------- CREATE -------------------- //
 
         // GET
+
         public IActionResult Create()
         {
-            
             return View();
         }
 
         // POST
+
         [HttpPost] // Method attribute
         [ValidateAntiForgeryToken] // CSRF (Cross-Site Request Forgery) 
 
@@ -53,9 +55,9 @@ namespace BulkyBookWeb.Controllers;
                 // Success message
                 TempData["success"] = "CoverType created successfully";
 
-                // Redirect to Index
                 return RedirectToAction("Index");
             }
+
             return View(obj);
         }
 
@@ -69,7 +71,8 @@ namespace BulkyBookWeb.Controllers;
             {
                 return NotFound();
             }
- 
+
+            // Retrieve the first or default covertype where category Id = id variable
             var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefaul(u=>u.Id == id); 
 
             if (CoverTypeFromDbFirst == null)
@@ -99,7 +102,6 @@ namespace BulkyBookWeb.Controllers;
                 // Success message
                 TempData["success"] = "CoverType updated successfully";
 
-                // Redirect to Index
                 return RedirectToAction("Index");
             }
 
@@ -117,7 +119,8 @@ namespace BulkyBookWeb.Controllers;
                 return NotFound();
             }
 
-            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefaul(u=>u.Id == id); // return first instance -> if no exists return NULL
+            // Retrieve the first or default covertype where category Id = id variable
+            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefaul(u => u.Id == id);
 
             if (CoverTypeFromDbFirst == null)
             {
@@ -130,7 +133,7 @@ namespace BulkyBookWeb.Controllers;
         // POST
 
         [HttpPost, ActionName("Delete")] // Method attribute + define action name("CoverType/Delete/id")
-    [ValidateAntiForgeryToken] // CSRF (Cross-Site Request Forgery) 
+        [ValidateAntiForgeryToken] // CSRF (Cross-Site Request Forgery) 
 
         public IActionResult DeletePOST(int? id)
         {
@@ -141,7 +144,7 @@ namespace BulkyBookWeb.Controllers;
                 return NotFound();
             }
 
-            // Remove object to Categories
+            // Remove covertype
             _unitOfWork.CoverType.Remove(obj);
 
             // Save on db
@@ -150,7 +153,6 @@ namespace BulkyBookWeb.Controllers;
             // Success message
             TempData["success"] = "CoverType deleted successfully";
 
-            // Redirect to Index
             return RedirectToAction("Index");
         }
     }

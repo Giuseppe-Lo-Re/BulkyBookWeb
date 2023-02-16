@@ -20,7 +20,9 @@ namespace BulkyBook.DataAccess.Repository
 
         public void Update(Product obj)
         {
+            // Retrieve the first or default product where product Id = id variable
             var objFromDb = _db.Products.FirstOrDefault(u=>u.Id == obj.Id);
+
             if(objFromDb != null)
             {
                 objFromDb.Title = obj.Title;

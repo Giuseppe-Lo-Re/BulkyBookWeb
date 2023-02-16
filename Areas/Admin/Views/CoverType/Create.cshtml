@@ -4,38 +4,37 @@
     <div class="border p-3 mt-4">
         <div class="row pb-2">
 
-            @*Title*@
+            @* Page Title *@
             <h2 class="text-primary">
                 Create CoverType
             </h2>
             <hr />
         </div>
 
-        @*Validation summary*@
+        @* Validation summary *@
         @*<div asp-validation-summary="All"></div>*@
 
-        @*Name*@
+        @* Name *@
         <div class="mb-3">
             <label asp-for="Name"></label>
             <input asp-for="Name" class="form-control" />
 
-            @*Validation*@
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
 
-        @*Create button*@
+        @* Create button *@
         <button type="submit" class="btn btn-primary" style="width:150px">
             Create
         </button>
 
-        @*Back to List button*@
+        @* Back to List button *@
         <a asp-controller="CoverType" asp-action="Index" class="btn btn-secondary" style="width:150px">
             Back to List
         </a>
     </div>
 </form>
 
-@*Validation (no reload on error validation)*@
+@* Validation (no reload on error validation) *@
 @section Scripts {
     @{
         <partial name="_ValidationScriptsPartial" />

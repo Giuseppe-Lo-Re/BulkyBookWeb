@@ -8,6 +8,8 @@ namespace BulkyBook.DataAccess.Repository.IRepository
 {
 	public interface IUnitOfWork
 	{
+		// Properties
+
 		ICategoryRepository Category { get; }
 		ICoverTypeRepository CoverType { get; }
         IProductRepository Product { get; }

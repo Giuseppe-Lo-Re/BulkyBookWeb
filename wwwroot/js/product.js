@@ -1,4 +1,6 @@
-﻿var dataTable;
+﻿// DataTable Logic
+
+var dataTable;
 
 $(document).ready(function () {
     loadDataTable();

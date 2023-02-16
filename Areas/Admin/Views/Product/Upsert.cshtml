@@ -4,7 +4,7 @@
     <div class="border p-3 mt-4 row">
         <div class="row pb-2">
 
-            @* Page Title *@
+            @* Page (dynamic) Title *@
             <h2 class="text-primary">
                 @(Model.Product.Id != 0 ? "Update" : "Create") Product
             </h2>
@@ -19,7 +19,6 @@
             <label asp-for="Product.Title"></label>
             <input asp-for="Product.Title" class="form-control" />
 
-            @* Validation *@
             <span asp-validation-for="Product.Title" class="text-danger"></span>
         </div>
 
@@ -28,7 +27,6 @@
             <label asp-for="Product.Description"></label>
             <textarea asp-for="Product.Description" row="3" class="form-control"> </textarea>
 
-            @* Validation *@
             <span asp-validation-for="Product.Description" class="text-danger"></span>
         </div>
 
@@ -37,7 +35,6 @@
             <label asp-for="Product.ISBN"></label>
             <input asp-for="Product.ISBN" class="form-control" />
 
-            @* Validation *@
             <span asp-validation-for="Product.ISBN" class="text-danger"></span>
         </div>
 
@@ -46,7 +43,6 @@
             <label asp-for="Product.Author"></label>
             <input asp-for="Product.Author" class="form-control" />
 
-            @*Validation*@
             <span asp-validation-for="Product.Author" class="text-danger"></span>
         </div>
 
@@ -55,7 +51,6 @@
             <label asp-for="Product.ListPrice"></label>
             <input asp-for="Product.ListPrice" class="form-control" />
 
-            @* Validation *@
             <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
         </div>
 
@@ -64,7 +59,6 @@
             <label asp-for="Product.Price"></label>
             <input asp-for="Product.Price" class="form-control" />
 
-            @* Validation *@
             <span asp-validation-for="Product.Price" class="text-danger"></span>
         </div>
 
@@ -73,7 +67,6 @@
             <label asp-for="Product.Price50"></label>
             <input asp-for="Product.Price50" class="form-control" />
 
-            @* Validation *@
             <span asp-validation-for="Product.Price50" class="text-danger"></span>
         </div>
 
@@ -82,7 +75,6 @@
             <label asp-for="Product.Price100"></label>
             <input asp-for="Product.Price100" class="form-control" />
 
-            @* Validation *@
             <span asp-validation-for="Product.Price100" class="text-danger"></span>
         </div>
 
@@ -99,7 +91,6 @@
                 <option disabled selected>-- Select Category -- </option>
             </select>
 
-            @* Validation *@
             <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
         </div>
 
@@ -110,10 +101,10 @@
                 <option disabled selected>-- Select CoverType -- </option>
             </select>
 
-            @* Validation *@
             <span asp-validation-for="Product.CoverTypeId" class="text-danger"></span>
         </div>
 
+        @* Dynamic button *@
         <div class="col-12">
             @if (Model.Product.Id != 0)
             {
@@ -140,11 +131,13 @@
     </div>
 </form>
 
-@*Validation (no reload on error validation)*@
+@* Validation (no reload on error validation) *@
 @section Scripts {
     @{
         <partial name="_ValidationScriptsPartial" />
     }
+
+    @* Sweet Alert Function (a image is necessary for a new product) *@
     <script>
         function ValidateInput() {
             if (document.getElementById("uploadBox").value == "") {

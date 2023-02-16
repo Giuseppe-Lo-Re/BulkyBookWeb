@@ -69,7 +69,7 @@ namespace BulkyBookWeb.Controllers;
             else
             {
                 // Retrieve the first or default product where category Id = id variable
-                productVM.Product = _unitOfWork.Product.GetFirstOrDefaul(u => u.Id == id);
+                productVM.Product = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id);
 
                 return View(productVM);
             }
@@ -161,12 +161,11 @@ namespace BulkyBookWeb.Controllers;
     // POST
 
     [HttpDelete] 
-    [ValidateAntiForgeryToken] // CSRF (Cross-Site Request Forgery) 
-
+    
     public IActionResult Delete(int? id)
     {
         // Retrieve the first or default category where category Id = id variable
-        var obj = _unitOfWork.Product.GetFirstOrDefaul(u => u.Id == id);
+        var obj = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id);
 
         if (obj == null)
         {

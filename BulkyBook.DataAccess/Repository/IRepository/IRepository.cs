@@ -12,7 +12,7 @@ namespace BulkyBook.DataAccess.Repository.IRepository
 		// T - Category
 
 		// Return first element or default with these conditions
-		T GetFirstOrDefaul(Expression<Func<T,bool>> filter, string? includeProperties = null);
+		T GetFirstOrDefault(Expression<Func<T,bool>> filter, string? includeProperties = null);
 
 		// Return all elements
 		IEnumerable<T> GetAll(string? includeProperties = null);

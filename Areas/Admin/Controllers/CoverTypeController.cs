@@ -73,7 +73,7 @@ namespace BulkyBookWeb.Controllers;
             }
 
             // Retrieve the first or default covertype where category Id = id variable
-            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefaul(u=>u.Id == id); 
+            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefault(u=>u.Id == id); 
 
             if (CoverTypeFromDbFirst == null)
             {
@@ -120,7 +120,7 @@ namespace BulkyBookWeb.Controllers;
             }
 
             // Retrieve the first or default covertype where category Id = id variable
-            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefaul(u => u.Id == id);
+            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefault(u => u.Id == id);
 
             if (CoverTypeFromDbFirst == null)
             {
@@ -137,7 +137,7 @@ namespace BulkyBookWeb.Controllers;
 
         public IActionResult DeletePOST(int? id)
         {
-            var obj = _unitOfWork.CoverType.GetFirstOrDefaul(u => u.Id == id);
+            var obj = _unitOfWork.CoverType.GetFirstOrDefault(u => u.Id == id);
 
             if (obj == null)
             {

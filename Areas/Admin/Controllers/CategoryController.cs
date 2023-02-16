@@ -80,7 +80,7 @@ namespace BulkyBookWeb.Controllers;
 
             //var categoryFromDb = _db.Categories.Find(id); // find category with specified id 
 
-            var categoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefaul(u=>u.Id == id); // return first instance -> if no exists return NULL
+            var categoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefault(u=>u.Id == id); // return first instance -> if no exists return NULL
 
             //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u => u.Id == id); // return only one element -> If exists more than one or no exists return NULL 
 
@@ -137,7 +137,7 @@ namespace BulkyBookWeb.Controllers;
 
             //var categoryFromDb = _db.Categories.Find(id); // find category with specified id 
 
-            var categoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefaul(u=>u.Id == id); // return first instance -> if no exists return NULL
+            var categoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefault(u=>u.Id == id); // return first instance -> if no exists return NULL
 
             //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u => u.Id == id); // return only one element -> If exists more than one or no exists return NULL 
 
@@ -157,7 +157,7 @@ namespace BulkyBookWeb.Controllers;
         public IActionResult DeletePOST(int? id)
         {
             // Retrieve the first or default category where category Id = id variable
-            var obj = _unitOfWork.Category.GetFirstOrDefaul(u => u.Id == id);
+            var obj = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
 
             if (obj == null)
             {

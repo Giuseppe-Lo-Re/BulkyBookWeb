@@ -146,53 +146,6 @@ namespace BulkyBookWeb.Controllers;
 
         // -------------------- DELETE -------------------- //
 
-        // GET
-
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            // Retrieve the first or default cavoertype where category Id = id variable
-            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstOrDefaul(u=>u.Id == id);
-
-            if (CoverTypeFromDbFirst == null)
-            {
-                return NotFound();
-            }
-
-            return View(CoverTypeFromDbFirst);
-        }
-
-        // POST
-
-        [HttpPost, ActionName("Delete")] // Method attribute + define action name("CoverType/Delete/id")
-        [ValidateAntiForgeryToken] // CSRF (Cross-Site Request Forgery) 
-
-        public IActionResult DeletePOST(int? id)
-        {
-            // Retrieve the first or default category where category Id = id variable
-            var obj = _unitOfWork.CoverType.GetFirstOrDefaul(u => u.Id == id);
-
-            if (obj == null)
-            {
-                return NotFound();
-            }
-
-            // Remove object to Categories
-            _unitOfWork.CoverType.Remove(obj);
-
-            // Save on db
-            _unitOfWork.Save();
-
-            // Success message
-            TempData["success"] = "CoverType deleted successfully";
-
-            return RedirectToAction("Index");
-        }
-
     #region API CALLS
 
     [HttpGet]
@@ -205,5 +158,36 @@ namespace BulkyBookWeb.Controllers;
         return Json(new { data = productList });
     }
 
-    #endregion
+    // POST
+
+    [HttpDelete] 
+    [ValidateAntiForgeryToken] // CSRF (Cross-Site Request Forgery) 
+
+    public IActionResult Delete(int? id)
+    {
+        // Retrieve the first or default category where category Id = id variable
+        var obj = _unitOfWork.Product.GetFirstOrDefaul(u => u.Id == id);
+
+        if (obj == null)
+        {
+            return Json(new { success = false, message = "Error while deleting" });
+        }
+
+        var oldImagePath = Path.Combine(_hostEnvironment.WebRootPath, obj.ImageUrl.TrimStart('/'));
+
+        if (System.IO.File.Exists(oldImagePath))
+        {
+            System.IO.File.Delete(oldImagePath);
+        }
+
+        // Remove object to Categories
+        _unitOfWork.Product.Remove(obj);
+
+        // Save on db
+        _unitOfWork.Save();
+
+        return Json(new { success = true, message = "Delete Successful" });
     }
+
+    #endregion
+}

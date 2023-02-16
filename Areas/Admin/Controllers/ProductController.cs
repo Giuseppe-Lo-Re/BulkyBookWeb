@@ -34,10 +34,9 @@ namespace BulkyBookWeb.Controllers;
         public IActionResult Upsert(int? id)
         {
 
-            // new instance of ProductVm (view model product)
+            // New instance of ProductVm (view model product)
             ProductVM productVM = new()
             {
-                // new 
                 Product = new(),
 
                 // Retrieve all categories
@@ -96,33 +95,51 @@ namespace BulkyBookWeb.Controllers;
                     string fileName = Guid.NewGuid().ToString();
 
                     // Set the path where the uploaded product image will be saved
-                    var uploads = Path.Combine(wwwRootPath, @"images/products");
+                    var uploads = Path.Combine(wwwRootPath, @"images/products/");
 
                     // Rename the uploaded image to a unique name
                     var extension = Path.GetExtension(file.FileName);
+                    
+                    if(obj.Product.ImageUrl != null)
+                    {
+                        var oldImagePath = Path.Combine(wwwRootPath, obj.Product.ImageUrl.TrimStart('/'));
+
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
 
                     // Create combined file path
                     using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                     {
-                        //Copy file into file streams
-                        file.CopyTo(fileStreams);
+                            // Copy file into file streams
+                            file.CopyTo(fileStreams);
+                        }
+
+                        // Assign image file URL
+                        obj.Product.ImageUrl = @"/images/products/" + fileName + extension;
                     }
 
-                    // Assign image file URL
-                    obj.Product.ImageUrl = @"\images/products" + fileName + extension;
+                    if(obj.Product.Id == 0)
+                    {
+                        // Add product to db
+                        _unitOfWork.Product.Add(obj.Product);
+                    }
+                    else
+                    {
+                        // Update product to db
+                        _unitOfWork.Product.Update(obj.Product);
+                    }
+                
+                    // Save on db
+                    _unitOfWork.Save();
+
+                    // Success message
+                    TempData["success"] = "Product created successfully";
+
+                    return RedirectToAction("Index");
                 }
-
-                // Add product to db
-                _unitOfWork.Product.Add(obj.Product);
-
-                // Save on db
-                _unitOfWork.Save();
-
-                // Success message
-                TempData["success"] = "Product created successfully";
-
-                return RedirectToAction("Index");
-            }
 
             return View(obj);
         }

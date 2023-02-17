@@ -21,7 +21,7 @@ function loadDataTable() {
                 "data": "id",
                 "render": function (data) {
                     return `
-                        <div class="w-20 text-center">
+                        <div class="d-flex justify-content-center">
                             <a href="/Admin/Product/Upsert?id=${data}"
                                class="btn btn-primary mx-2">
                                <i class="bi bi-pencil-square"></i>

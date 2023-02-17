@@ -1,9 +1,11 @@
-﻿using BulkyBook.Models;
+using BulkyBook.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace BulkyBook.DataAccess;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 {
     // Constructor
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -15,8 +17,9 @@ public class ApplicationDbContext : DbContext
     public DbSet<CoverType> CoverTypes { get; set; }
 
     public DbSet<Product> Products { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+    }
 }
-
-    
-
-

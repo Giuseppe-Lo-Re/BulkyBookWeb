@@ -1,8 +1,64 @@
-﻿@{
+﻿@model IEnumerable<BulkyBook.Models.Product>
+@{
     ViewData["Title"] = "DEV4SIDE";
 }
 
-<div class="text-center">
-    <h1 class="display-4 text-danger">D E V 4 S I D E</h1>
-</div>
+<div class="row pb-3">
 
+    @* Foreach loop to print all products *@
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-3 col-md-6">
+            <div class="row p-2">
+                <div class="col-12 p-1" style="border:1px solid #008cba; border-radius:5px;">
+                    <div class="card">
+
+                        @* Image *@
+                        <img src="@product.ImageUrl" class="card-img-top rounded" />
+                        <div class="pl-1">
+
+                            <div class="card-body">
+
+                                @* Title *@
+                                <p class="card-title h5 text-primary">
+                                    @product.Title
+                                </p>
+
+                                @* Author *@
+                                <p class="card-title h5 text-info">
+                                    by @product.Author
+                                </p>
+
+                                @* List Price *@
+                                <div class="pl-1">
+                                    <p>
+                                        List Price:
+                                        <strike>
+                                            <b>
+                                                $@product.ListPrice.ToString("0.00")
+                                            </b>
+                                        </strike>
+                                    </p>
+                                </div>
+
+                                @* List Price *@
+                                <div class="pl-1">
+                                    <p>
+                                        As low as:
+                                        <b>
+                                            $@product.Price100.ToString("0.00")
+                                        </b>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a asp-action="Details" class="btn btn-primary form-control" asp-route.id="@product.Id">
+                        Details
+                    </a>
+                </div>
+            </div>
+        </div>
+     }
+</div>

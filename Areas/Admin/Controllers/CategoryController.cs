@@ -9,7 +9,6 @@ namespace BulkyBookWeb.Controllers;
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-
         // Constructor
         public CategoryController(IUnitOfWork unitOfWork)
         {

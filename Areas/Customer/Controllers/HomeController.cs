@@ -17,10 +17,20 @@ public class HomeController : Controller
         _unitOfWork = unitOfWork;
     }
 
+    // -------------------- INDEX -------------------- //
+
     public IActionResult Index()
     {
         IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category,CoverType");
         return View(productList);
+    }
+
+    // -------------------- DETAILS -------------------- //
+
+    public IActionResult Details(int id)
+    {
+        Product product = _unitOfWork.Product.GetFirstOrDefault(u=>u.Id == id,includeProperties: "Category,CoverType");
+        return View(product);
     }
 
     public IActionResult Privacy()

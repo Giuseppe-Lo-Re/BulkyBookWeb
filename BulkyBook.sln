@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulkyBook.Models", "..\Bulk
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulkyBook.Utility", "..\BulkyBook.Utility\BulkyBook.Utility.csproj", "{4B31A554-585C-41F6-B647-FB199BCDCA7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulkyBookWeb", "BulkyBookWeb.csproj", "{D99A11A5-DE60-4A70-990F-D8E140497EFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulkyBookWeb", "BulkyBookWeb.csproj", "{0155A1D5-C88E-457A-ACBF-909D184DEB23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{4B31A554-585C-41F6-B647-FB199BCDCA7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B31A554-585C-41F6-B647-FB199BCDCA7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B31A554-585C-41F6-B647-FB199BCDCA7D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D99A11A5-DE60-4A70-990F-D8E140497EFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D99A11A5-DE60-4A70-990F-D8E140497EFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D99A11A5-DE60-4A70-990F-D8E140497EFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D99A11A5-DE60-4A70-990F-D8E140497EFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0155A1D5-C88E-457A-ACBF-909D184DEB23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0155A1D5-C88E-457A-ACBF-909D184DEB23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0155A1D5-C88E-457A-ACBF-909D184DEB23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0155A1D5-C88E-457A-ACBF-909D184DEB23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

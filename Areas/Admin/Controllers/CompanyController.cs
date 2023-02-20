@@ -11,7 +11,6 @@ namespace BulkyBookWeb.Controllers;
 public class CompanyController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IWebHostEnvironment _hostEnvironment;
 
     // Constructor
     public CompanyController(IUnitOfWork unitOfWork)
@@ -78,9 +77,6 @@ public class CompanyController : Controller
 
             // Save on db
             _unitOfWork.Save();
-
-            // Success message
-            TempData["success"] = "Company created successfully";
 
             return RedirectToAction("Index");
         }

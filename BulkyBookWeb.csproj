@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -44,12 +44,15 @@
     <Folder Include="Areas\Admin\Views\Company\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BulkyBook.DataAccess\BulkyBook.DataAccess.csproj">
+<ProjectReference Include="..\BulkyBook.Utility\BulkyBook.Utility.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
-    <ProjectReference Include="..\BulkyBook.Models\BulkyBook.Models.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
+<ProjectReference Include="..\BulkyBook.DataAccess\BulkyBook.DataAccess.csproj">
+  <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+</ProjectReference>
+<ProjectReference Include="..\BulkyBook.Models\BulkyBook.Models.csproj">
+  <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+</ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\images\" />

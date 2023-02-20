@@ -30,6 +30,7 @@
     <None Remove="Microsoft.AspNetCore.Identity.UI" />
     <None Remove="Microsoft.AspNetCore.Mvc.ViewFeatures" />
     <None Remove="Microsoft.EntityFrameworkCore.Relational" />
+    <None Remove="Areas\Admin\Views\Company\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
@@ -40,6 +41,7 @@
     <Folder Include="Areas\Admin\Views\Product\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\images\products\" />
+    <Folder Include="Areas\Admin\Views\Company\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BulkyBook.DataAccess\BulkyBook.DataAccess.csproj">

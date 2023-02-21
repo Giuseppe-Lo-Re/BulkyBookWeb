@@ -22,4 +22,6 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 
     public DbSet<Company> Companies { get; set; }
 
+    public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+
 }

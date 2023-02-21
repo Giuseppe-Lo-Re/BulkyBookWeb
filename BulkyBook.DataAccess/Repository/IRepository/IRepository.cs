@@ -15,7 +15,7 @@ namespace BulkyBook.DataAccess.Repository.IRepository
 		T GetFirstOrDefault(Expression<Func<T,bool>> filter, string? includeProperties = null);
 
 		// Return all elements
-		IEnumerable<T> GetAll(Expression<Func<T, bool>> filter, string? includeProperties = null);
+		IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter=null, string? includeProperties = null);
 
 		// Add new element
 		void Add(T entity);

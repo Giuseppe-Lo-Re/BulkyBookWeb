@@ -31,6 +31,7 @@
     <None Remove="Microsoft.AspNetCore.Mvc.ViewFeatures" />
     <None Remove="Microsoft.EntityFrameworkCore.Relational" />
     <None Remove="Areas\Admin\Views\Company\" />
+    <None Remove="Areas\Customer\Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
@@ -42,6 +43,7 @@
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\images\products\" />
     <Folder Include="Areas\Admin\Views\Company\" />
+    <Folder Include="Areas\Customer\Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
 <ProjectReference Include="..\BulkyBook.Utility\BulkyBook.Utility.csproj">

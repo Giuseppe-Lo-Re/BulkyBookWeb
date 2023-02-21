@@ -5,6 +5,12 @@ VisualStudioVersion = 25.0.1704.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulkyBookWeb", "BulkyBookWeb.csproj", "{4C02C388-40D7-43DC-88BD-09F23814C424}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulkyBook.DataAccess", "..\BulkyBook.DataAccess\BulkyBook.DataAccess.csproj", "{411EB6A1-FA53-4747-BBEE-17EC7568B199}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulkyBook.Models", "..\BulkyBook.Models\BulkyBook.Models.csproj", "{829B7C09-4076-460C-A1D5-6430F6B2EB57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulkyBook.Utility", "..\BulkyBook.Utility\BulkyBook.Utility.csproj", "{4291A209-9110-4593-BC25-D88A58E33F74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{4C02C388-40D7-43DC-88BD-09F23814C424}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C02C388-40D7-43DC-88BD-09F23814C424}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C02C388-40D7-43DC-88BD-09F23814C424}.Release|Any CPU.Build.0 = Release|Any CPU
+		{411EB6A1-FA53-4747-BBEE-17EC7568B199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{411EB6A1-FA53-4747-BBEE-17EC7568B199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{411EB6A1-FA53-4747-BBEE-17EC7568B199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{411EB6A1-FA53-4747-BBEE-17EC7568B199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{829B7C09-4076-460C-A1D5-6430F6B2EB57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{829B7C09-4076-460C-A1D5-6430F6B2EB57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{829B7C09-4076-460C-A1D5-6430F6B2EB57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{829B7C09-4076-460C-A1D5-6430F6B2EB57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4291A209-9110-4593-BC25-D88A58E33F74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4291A209-9110-4593-BC25-D88A58E33F74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4291A209-9110-4593-BC25-D88A58E33F74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4291A209-9110-4593-BC25-D88A58E33F74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -17,6 +17,7 @@
     <None Remove="Microsoft.AspNetCore.Identity.UI" />
     <None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
     <None Remove="Microsoft.EntityFrameworkCore.Relational" />
+    <None Remove="Stripe.net" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
@@ -34,5 +35,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.3" />
+    <PackageReference Include="Stripe.net" Version="41.7.0" />
   </ItemGroup>
 </Project>

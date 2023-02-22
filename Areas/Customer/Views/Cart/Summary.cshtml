@@ -1,4 +1,6 @@
 ﻿@model BulkyBook.Models.ViewModels.ShoppingCartVM
+@using Microsoft.Extensions.Options
+@inject IOptions<BulkyBook.Utility.StripeSettings> Stripe
 
 <form method="post">
     <br />
@@ -73,7 +75,9 @@
                                     <label>City</label>
                                 </div>
                                 <div class="col-9">
-                                    <input class="form-control" />
+                                    <input asp-for="OrderHeader.City" class="form-control" />
+
+                                    <span asp-validation-for="OrderHeader.City" class="Text-danger"></span>
                                 </div>
                             </div>
 

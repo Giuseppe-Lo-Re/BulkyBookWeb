@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using BulkyBook.Utility;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container
 builder.Services.AddControllersWithViews();
 
 // Add services to database
@@ -16,10 +17,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
+// Stripe configuration
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+
+// Identity Configuration
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+// Scoped Dependency injection service IUnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// Singleton Instance IEmailSender
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
 // Add RuntimeCompilation to refresh server in the executing solution
@@ -43,6 +51,8 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
+
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecreKey").Get<string>();
 
 app.UseAuthorization();
 

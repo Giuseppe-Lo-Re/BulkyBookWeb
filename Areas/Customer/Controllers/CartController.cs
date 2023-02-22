@@ -4,7 +4,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using BulkyBook.DataAccess.Repository.IRepository;
+using BulkyBook.Models;
 using BulkyBook.Models.ViewModels;
+using BulkyBook.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +25,9 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
         public CartController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-        }     
+        }
+
+        // -------------------- INDEX -------------------- //
 
         public IActionResult Index()
         {
@@ -47,6 +51,8 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
 
             return View(ShoppingCartVM);
         }
+
+        // -------------------- SUMMARY -------------------- //
 
         public IActionResult Summary()
         {
@@ -75,12 +81,63 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
                 cart.Price = GetPriceBasedOnQuantity(cart.Count, cart.Product.Price,
                     cart.Product.Price50, cart.Product.Price100);
 
-                ShoppingCartVM.CartTotal += (cart.Price * cart.Count);
+                ShoppingCartVM.OrderHeader.OrderTotal += (cart.Price * cart.Count);
             }
 
             return View(ShoppingCartVM);
-            return View();
         }
+
+        // POST
+
+        [HttpPost]
+        [ActionName("Summary")]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult SummaryPOST()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            ShoppingCartVM.ListCart = _unitOfWork.ShoppingCart.GetAll(
+                    u => u.ApplicationUserId == claim.Value, includeProperties: "Product");
+
+            ShoppingCartVM.OrderHeader.PaymentStaus = SD.PaymentStatusPending;
+            ShoppingCartVM.OrderHeader.OrderStatus = SD.StatusPending;
+            ShoppingCartVM.OrderHeader.OrderDate = System.DateTime.Now;
+            ShoppingCartVM.OrderHeader.ApplicationUserId = claim.Value;
+
+            foreach (var cart in ShoppingCartVM.ListCart)
+            {
+                cart.Price = GetPriceBasedOnQuantity(cart.Count, cart.Product.Price,
+                    cart.Product.Price50, cart.Product.Price100);
+
+                ShoppingCartVM.OrderHeader.OrderTotal += (cart.Price * cart.Count);
+            }
+
+            _unitOfWork.OrderHeader.Add(ShoppingCartVM.OrderHeader);
+            _unitOfWork.Save();
+
+            foreach (var cart in ShoppingCartVM.ListCart)
+            {
+                OrderDetail orderDetail = new()
+                {
+                    ProductId = cart.ProductId,
+                    OrderId = ShoppingCartVM.OrderHeader.Id,
+                    Price = cart.Price,
+                    Count = cart.Count
+                };
+
+                _unitOfWork.OrderDetail.Add(orderDetail);
+                _unitOfWork.Save();
+            }
+
+            _unitOfWork.ShoppingCart.RemoveRange(ShoppingCartVM.ListCart);
+            _unitOfWork.Save();
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        // -------------------- PLUS -------------------- //
 
         public IActionResult Plus(int cartId)
         {
@@ -91,6 +148,8 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        // -------------------- MINUS -------------------- //
 
         public IActionResult Minus(int cartId)
         {
@@ -110,6 +169,8 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // -------------------- REMOVE -------------------- //
+
         public IActionResult Remove(int cartId)
         {
             var cart = _unitOfWork.ShoppingCart.GetFirstOrDefault(u => u.Id == cartId);
@@ -119,6 +180,8 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        // -------------------- UTILITY FUNCTION -------------------- //
 
         private double GetPriceBasedOnQuantity(double quantity, double price, double price50, double price100)
         {

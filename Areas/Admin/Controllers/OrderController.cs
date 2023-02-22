@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BulkyBookWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class OrderController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -30,7 +31,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             IEnumerable<OrderHeader> orderHeaders;
 
             // Retrieve a list of all products and includes category and covertype
-            orderHeaders = _unitOfWork.OrderHeader.GetAll(includeProperties: "ApllicationUser");
+            orderHeaders = _unitOfWork.OrderHeader.GetAll(includeProperties: "ApplicationUser");
 
             // Return a Json containting the list
             return Json(new { data = orderHeaders });

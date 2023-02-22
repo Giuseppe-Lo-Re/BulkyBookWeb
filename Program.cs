@@ -20,7 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 // Stripe configuration
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
-// Identity Configuration
+// Identity configuration
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 

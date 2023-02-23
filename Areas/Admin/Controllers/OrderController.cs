@@ -21,8 +21,6 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         [BindProperty]
 
         public OrderVM OrderVM { get; set; }
-        public OrderHeader OrderHeader { get; private set; }
-        public IEnumerable<OrderDetail> OrderDetail { get; private set; }
 
         public OrderController(IUnitOfWork unitOfWork)
         {
@@ -40,11 +38,11 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
         public IActionResult Details(int orderId)
         {
-            OrderVM = new OrderVM();
+            OrderVM = new OrderVM()
             {
                 OrderHeader = _unitOfWork.OrderHeader.GetFirstOrDefault(u => u.Id == orderId, includeProperties: "ApplicationUser"),
                 OrderDetail = _unitOfWork.OrderDetail.GetAll(u => u.OrderId == orderId, includeProperties: "Product")
-            }
+            };
 
             return View(OrderVM);
         }

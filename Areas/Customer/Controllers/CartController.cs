@@ -157,11 +157,6 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
 
                 var options = new SessionCreateOptions
                 {
-                    //PaymentMethodTypes = new List<string>
-                    //{
-                    //    "card",
-                    //},
-
                     LineItems = new List<SessionLineItemOptions>(),
                     Mode = "payment",
                     SuccessUrl = domain + $"customer/cart/OrderConfirmation?id={ShoppingCartVM.OrderHeader.Id}",

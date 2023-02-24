@@ -297,6 +297,13 @@
                             </li>
                         </ul>
 
+                        @if (Model.OrderHeader.PaymentStaus == SD.PaymentStatusDelayedPayment &&
+                        Model.OrderHeader.OrderStatus == SD.StatusShipped)
+                        {
+                        @* "Pay Now" button *@
+                        <input type="submit" class="btn btn-success form-control my-1" value="Pay Now" />
+                        }
+
                         @* Visible only to Admin and Employee *@
                         @if (User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee))
                         {
@@ -304,25 +311,16 @@
                             {
                                 @* "Start Processing" button *@
                                 <input asp-action="StartProcessing" type="submit" class="btn btn-primary form-control my-1" value="Start Processing" />
-                                }
+                            }
 
-                                if (Model.OrderHeader.OrderStatus == SD.StatusInProcess)
-                                {
+                            if (Model.OrderHeader.OrderStatus == SD.StatusInProcess)
+                            {
                                 @* "Ship Order" button *@
-                                <input
-                                       asp-action="ShipOrder"
+                                <input asp-action="ShipOrder"
                                        onclick="return ValidateInput()"
                                        type="submit"
                                        class="btn btn-primary form-control my-1"
-                                       value="Ship Order"
-                                />
-                                }
-
-                                if (Model.OrderHeader.PaymentStaus == SD.PaymentStatusDelayedPayment &&
-                                    Model.OrderHeader.OrderStatus == SD.StatusShipped)
-                                {
-                                @* "Pay Now" button *@
-                                <input type="submit" class="btn btn-success form-control my-1" value="Pay Now" />
+                                       value="Ship Order" />
                             }
 
                             if (Model.OrderHeader.OrderStatus != SD.StatusRefunded &&
@@ -330,14 +328,12 @@
                                 Model.OrderHeader.OrderStatus != SD.StatusShipped)
                             {
                                 @* "Cancel Order" button *@
-                                <input
-                                       asp-action="CancelOrder"
+                                <input asp-action="CancelOrder"
                                        type="submit"
                                        class="btn btn-danger form-control my-1"
-                                       value="Cancel Order"
-                                />
+                                       value="Cancel Order" />
                             }
-                         }
+                        }
                     </div>
                     </div>
                 </div>

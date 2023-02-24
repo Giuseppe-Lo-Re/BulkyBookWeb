@@ -23,7 +23,8 @@ namespace BulkyBook.Utility
             {
                 emailClient.Connect("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
 
-                emailClient.Authenticate("instantgods@gmail.com", "unstabl34");
+                // NO TESTED beacause Gmail don't authorize third part app since may 2022
+                emailClient.Authenticate("instantgods@gmail.com", "password"); 
 
                 emailClient.Send(emailToSend);
 

@@ -34,6 +34,9 @@
     <None Remove="Areas\Customer\Views\Cart\" />
     <None Remove="Stripe.net" />
     <None Remove="Areas\Admin\Views\Order\" />
+    <None Remove="ViewComponents\" />
+    <None Remove="Views\Shared\Components\" />
+    <None Remove="Views\Shared\Components\ShoppingCart\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
@@ -47,6 +50,9 @@
     <Folder Include="Areas\Admin\Views\Company\" />
     <Folder Include="Areas\Customer\Views\Cart\" />
     <Folder Include="Areas\Admin\Views\Order\" />
+    <Folder Include="ViewComponents\" />
+    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="Views\Shared\Components\ShoppingCart\" />
   </ItemGroup>
   <ItemGroup>
 <ProjectReference Include="..\BulkyBook.Utility\BulkyBook.Utility.csproj">

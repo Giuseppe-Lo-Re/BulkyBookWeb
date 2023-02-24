@@ -19,6 +19,8 @@
     <None Remove="Stripe.net" />
     <None Remove="MailKit" />
     <None Remove="MimeKit" />
+    <None Remove="Facebook" />
+    <None Remove="Microsoft.AspNetCore.Authentication.Facebook" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.3" />
@@ -36,5 +38,7 @@
     <PackageReference Include="Stripe.net" Version="41.7.0" />
     <PackageReference Include="MailKit" Version="3.5.0" />
     <PackageReference Include="MimeKit" Version="3.5.0" />
+    <PackageReference Include="Facebook" Version="7.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="7.0.3" />
   </ItemGroup>
 </Project>

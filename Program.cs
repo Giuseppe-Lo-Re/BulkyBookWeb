@@ -34,6 +34,13 @@ builder.Services.AddSingleton<IEmailSender, EmailSender>();
 // Add RuntimeCompilation to refresh server in the executing solution
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
+//Facebook
+builder.Services.AddAuthentication().AddFacebook(options =>
+{
+    options.AppId = "2118477485014308";
+    options.AppSecret = "cb5aae8ea3ba92fd7cb94fbff975f7d6";
+});
+
 // Configure the behavior of the application cookie
 builder.Services.ConfigureApplicationCookie(options =>
 {

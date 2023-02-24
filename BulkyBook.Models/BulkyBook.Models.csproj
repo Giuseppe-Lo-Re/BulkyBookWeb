@@ -18,6 +18,8 @@
     <None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
     <None Remove="Microsoft.EntityFrameworkCore.Relational" />
     <None Remove="Stripe.net" />
+    <None Remove="Facebook" />
+    <None Remove="Microsoft.AspNetCore.Authentication.Facebook" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
@@ -36,5 +38,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.3" />
     <PackageReference Include="Stripe.net" Version="41.7.0" />
+    <PackageReference Include="Facebook" Version="7.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="7.0.3" />
   </ItemGroup>
 </Project>
